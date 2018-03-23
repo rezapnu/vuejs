@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" name="" v-model="message1">
+        <p>{{ message }}</p>
+        <p>{{ message1 }}</p>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+    <script type="text/javascript">
+        // document.querySelector("#app input").value = "hello vue";
+        // document.querySelector("#app p").innerText = "hello vue";
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: "Hello Vue!",
+                message1: "Hi Vue!"
+            }
+        })
+    </script>
+
+  </body>
+</html>
