@@ -2,22 +2,31 @@
 <!--suppress ALL -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <title>ایجاد لیست</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="css/bootstrap.min.css" type="text/css">
+    <link href="css/bootstrap-rtl.min.css" type="text/css">
+    <link href="css/style.css" type="text/css">
 </head>
 
 <body>
 <div id="app">
-    <input type="text" class="form-control" v-model="newUser" placeholder="کار جدید" v-on:keyup.enter="addUser">
-    <ul>
-        <li v-for="(name,index) in users" >
-            <a href="#" v-on:click ="removeuser(index)">{{ index }} - {{ name }}</a>
-        </li>
-    </ul>
-    <div v-for="(article,index) in articles" >
-        <a href="#" v-on:click ="removearticle(index)" >{{ article.title }}</a>
-        <p>{{ article.content }}</p>
+    <div class="row">
+        <div class="col-lg-12">
+            <input type="text" class="form-control" v-model="newUser" placeholder="کار جدید" v-on:keyup.enter="addUser">
+            <ul class="list-group">
+                <li class="list-group-item" v-for="(name,index) in users" >
+                    <a href="#" v-on:click ="removeuser(index)"> {{ name }}</a>
+                </li>
+            </ul>
+            <div class="list-group" v-for="(article,index) in articles" >
+                <a class="list-group-item" href="#" v-on:click ="removearticle(index)" >{{ article.title }}</a>
+                <p>{{ article.content }}</p>
+            </div>
+        </div>
     </div>
 </div>
+
 
 <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
 <script type="text/javascript">

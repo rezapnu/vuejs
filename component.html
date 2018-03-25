@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ایجاد لیست</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="css/bootstrap.min.css" type="text/css">
+    <link href="css/bootstrap-rtl.min.css" type="text/css">
+    <link href="css/style.css" type="text/css">
+</head>
+
+<body style="direction: rtl;margin: 50px">
+<div id="app" class="row">
+    <div class="col-lg-12">
+        <div class="container">
+            <input type="text" class="form-control" v-model="newUser" placeholder="کار جدید" v-on:keyup.enter="addUser">
+            <ul class="col-lg-3">
+                <li class="jumbotron" v-for="(name,index) in users" >
+                    <a href="#" v-on:click ="removeuser(index)"> {{ name }}</a>
+                </li>
+            </ul>
+            <div class="col-lg-4" v-for="(article,index) in articles" >
+                <a class="list-group-item" href="#" v-on:click ="removeArticle(index)" >{{ article.title }}</a>
+                <p>{{ article.content }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<script type="text/javascript">
+    let app = new Vue({
+        el: '#app',
+        data: {
+            newArticle : '',
+            Articles : [
+                {
+                    title : "project 1",
+                    content : "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. ",
+                    complete: false
+                },
+                {
+                    title : "project 2",
+                    content : "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. ",
+                    complete: false
+                },
+                {
+                    title : "project 3",
+                    content : "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. ",
+                    complete: false
+                },
+                {
+                    title : "project 4",
+                    content : "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. ",
+                    complete: false
+                }
+            ]
+        },
+        methods : {
+            addArticle() {
+                if(this.newArticle != '') {
+                    this.Articles.push(this.newArticle);
+                    this.newArticle = '';
+                }
+            },
+            removeArticle(index) {
+                this.Articles.splice(index,1);
+            }
+        },
+    })
+</script>
+
+</body>
+</html>
