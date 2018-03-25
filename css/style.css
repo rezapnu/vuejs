@@ -1,0 +1,12 @@
+body {
+  font-family: IRANsans;
+}
+
+a:hover , a:focus {
+  text-decoration: none;
+}
+
+.complete {
+  text-decoration: line-through;
+  color: #555;
+}
