@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+
+    <title>کامپوننت 1</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/album.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body style="direction: rtl">
+
+<header>
+    <div class="bg-dark collapse" id="navbarHeader" style="">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+                    <h4 class="text-white">About</h4>
+                    <p class="text-muted">Add some information about the album
+                        below, the author, or any other background context. Make it a few
+                        sentences long so folks can pick up some informative tidbits. Then, link
+                        them off to some social networking sites or contact information.
+                    </p>
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+                    <h4 class="text-white">Contact</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                        <li><a href="#" class="text-white">Like on Facebook</a></li>
+                        <li><a href="#" class="text-white">Email me</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                <strong>Album</strong>
+            </a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main role="main">
+
+    <div class="album py-5 bg-light">
+        <div class="container" id="app">
+            <div class="row">
+                <h3>لیست کارهای روزانه</h3>
+                <ul class="col-md-12">
+                    <li style="text-align: justify"  v-for="(article,index) in Articles">
+                        <a href="#" v-on:click ="removeArticle(index)" :class="{ complete : article.complete }" >{{ article.title }}</a><br>
+                    </li>
+                </ul>
+                <input type="text" class="form-control" v-model="newArticle.title" placeholder="کار جدید" v-on:keyup.enter="addArticle">
+                <div class="col-md-12"><br></div>
+
+                <alert title="اخطار" message="عملیات به درستی انجام نشده است." type="secondary"></alert>
+                <div class="col-md-12"><br></div>
+                <alert title="هشدار" message="عملیات به طور کامل انجام نشده است." type="warning"></alert>
+            </div>
+
+            <br><hr><br>
+
+            <div class="row">
+                <h3>لیست کارهای انجام شده</h3>
+                <ul class="col-md-12">
+                    <li style="text-align: justify" v-for="(article,index) in readArticle" >
+                        <a href="#" >{{ article.title }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a href="#">Back to top</a>
+        </p>
+        <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
+        <p>New to Bootstrap? <a href="https://getbootstrap.com/docs/4.0/">Visit the homepage</a> or read our <a href="https://getbootstrap.com/docs/4.0/getting-started/">getting started guide</a>.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery-3.js" ></script>
+<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/holder.js"></script>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<script type="text/javascript">
+    Vue.component('alert',{
+        props : ['title','message','type'],
+        template : `
+            <div :class="['alert' , classAlert ]" role="alert" v-show="isActive" >
+                <button type="button" class="close" @click="isActive = false" >
+                    <span aria-hidden="true">×</span>
+                </button>
+                <strong>{{ title }} </strong>- {{ message }}
+            </div>`,
+        data(){
+            return {
+                classAlert : `alert-${this.type}`,
+                isActive : true
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            newArticle : {
+                title : '',
+                complete : false
+            },
+            Articles : [
+                { title:"آموزش لاراول", complete:true },
+                { title:"پایتخت 5", complete:true },
+                { title:"تماشای فوتبال", complete:false },
+                { title:"فیلم 10 لاراول", complete:false }
+            ]
+        },
+        methods : {
+            addArticle() {
+                if(this.newArticle.title != "") {
+                    this.Articles.push(this.newArticle);
+                    this.newArticle = { title : "" , complete : false};
+                }
+            },
+            removeArticle(index) {
+                this.Articles[index].complete = ! this.Articles[index].complete;
+                //this.Articles.splice(index,1);
+            },
+        },
+        computed : {
+            readArticle(){
+                return this.Articles.filter(article => article.complete)
+            }
+        }
+
+
+    });
+</script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="348" height="225" viewBox="0 0 348 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="17" style="font-weight:bold;font-size:17pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg>
+</body>
+</html>
